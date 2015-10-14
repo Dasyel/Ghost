@@ -1,5 +1,7 @@
 package nl.mprog.ghost.ghost;
 
+// Dasyel Willems (10172548)
+
 public class Language {
     //Use the same order here as in res/values/arrays.xml!
     private static final String[][] languages = {

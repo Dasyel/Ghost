@@ -1,5 +1,7 @@
 package nl.mprog.ghost.ghost;
 
+// Dasyel Willems (10172548)
+
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;

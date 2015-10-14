@@ -1,5 +1,7 @@
 package nl.mprog.ghost.ghost;
 
+// Dasyel Willems (10172548)
+
 public class Player {
     private int id;
     private String name;

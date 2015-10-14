@@ -1,5 +1,7 @@
 package nl.mprog.ghost.ghost;
 
+// Dasyel Willems (10172548)
+
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -41,30 +43,6 @@ public class MainMenuActivity extends Activity {
                 android.R.layout.simple_dropdown_item_1line, playerNames);
         this.name1Picker.setAdapter(adapter);
         this.name2Picker.setAdapter(adapter);
-
-        View.OnFocusChangeListener focusChangeListener = new View.OnFocusChangeListener() {
-            @Override
-            public void onFocusChange(View v, boolean hasFocus) {
-                AutoCompleteTextView namePicker = (AutoCompleteTextView) v;
-                if(hasFocus)
-                {
-                    namePicker.showDropDown();
-                } else {
-                    namePicker.dismissDropDown();
-                }
-            }
-        };
-        View.OnClickListener clickListener = new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                AutoCompleteTextView namePicker = (AutoCompleteTextView) v;
-                    namePicker.showDropDown();
-            }
-        };
-        this.name1Picker.setOnFocusChangeListener(focusChangeListener);
-        this.name2Picker.setOnFocusChangeListener(focusChangeListener);
-        this.name1Picker.setOnClickListener(clickListener);
-        this.name2Picker.setOnClickListener(clickListener);
 
         this.name1Picker.setText(spWrapper.getName1Picker());
         this.name2Picker.setText(spWrapper.getName2Picker());

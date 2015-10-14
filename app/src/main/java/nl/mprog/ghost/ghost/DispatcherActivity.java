@@ -1,5 +1,7 @@
 package nl.mprog.ghost.ghost;
 
+// Dasyel Willems (10172548)
+
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
