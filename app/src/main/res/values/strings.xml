@@ -13,7 +13,10 @@
     <string name="new_game">New Game</string>
     <string name="continue_game">Continue Game</string>
     <string name="reset_prompt">There\'s still a game in progress. What do you want to do?</string>
+    <string name="reset_prompt_highscores">What do you want to do?</string>
+    <string name="back_to_highscores">Back to highscores</string>
 
+    <string name="bullshit_button">Bullshit!</string>
     <string name="guess_button">Submit!</string>
     <string name="guess_field_hint">Your letter</string>
 
@@ -31,4 +34,7 @@
     <string name="toast_invalid_input">Only input letters.</string>
     <string name="toast_created_word">This is a word!</string>
     <string name="toast_no_words_left">Can\'t make words with this!</string>
+    <string name="toast_words_available">There were still words available</string>
+    <string name="toast_one_word_available">There was still one word possible</string>
+    <string name="toast_default">An unexpected problem occurred</string>
 </resources>

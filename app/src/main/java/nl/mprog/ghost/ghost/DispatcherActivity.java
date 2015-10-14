@@ -1,11 +1,10 @@
-package ghost.mprog.nl.ghost;
+package nl.mprog.ghost.ghost;
 
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ProgressBar;
@@ -15,16 +14,25 @@ import android.widget.TextView;
 public class DispatcherActivity extends Activity {
     private Class nextClass;
 
+    private SharedPreferencesWrapper spWrapper;
+
+    ProgressBar initProgressBar;
+    TextView initTextView;
+    Button initButton;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dispatcher);
-        SharedPreferencesWrapper spw = new SharedPreferencesWrapper(this);
+        this.spWrapper = new SharedPreferencesWrapper(this);
 
-        ProgressBar pb = (ProgressBar) findViewById(R.id.progressBarInitDB);
-        pb.setVisibility(ProgressBar.INVISIBLE);
+        this.initProgressBar = (ProgressBar) findViewById(R.id.initProgressBar);
+        this.initTextView = (TextView) findViewById(R.id.initTextView);
+        this.initButton = (Button) findViewById(R.id.initButton);
 
-        String currentActivity = spw.getCurrentActivity();
+        this.initProgressBar.setVisibility(ProgressBar.INVISIBLE);
+
+        String currentActivity = this.spWrapper.getCurrentActivity();
         Class nextClass;
         switch (currentActivity){
             case MainMenuActivity.ACTIVITY_NAME:
@@ -44,7 +52,7 @@ public class DispatcherActivity extends Activity {
         }
         this.nextClass = nextClass;
 
-        if (spw.getDbVersion() == DatabaseHandler.getDatabaseVersion()) {
+        if (this.spWrapper.getDbVersion() == DatabaseHandler.getDatabaseVersion()) {
             startActivity(new Intent(this, nextClass));
         }
     }
@@ -71,21 +79,18 @@ public class DispatcherActivity extends Activity {
 
         @Override
         protected void onPostExecute(Void param) {
-            SharedPreferencesWrapper spw = new SharedPreferencesWrapper(this.context);
-            spw.setDbVersion(DatabaseHandler.getDatabaseVersion());
+            super.onPostExecute(param);
+            spWrapper.setDbVersion(DatabaseHandler.getDatabaseVersion());
             Intent intent = new Intent(this.context, this.nextClass);
-            context.startActivity(intent);
+            this.context.startActivity(intent);
         }
 
         @Override
         protected void onPreExecute() {
-            ProgressBar pb = (ProgressBar) findViewById(R.id.progressBarInitDB);
-            TextView tv = (TextView) findViewById(R.id.initTextView);
-            Button btn = (Button) findViewById(R.id.initButton);
-
-            pb.setVisibility(ProgressBar.VISIBLE);
-            tv.setText(R.string.init_started_text);
-            btn.setEnabled(false);
+            super.onPreExecute();
+            initProgressBar.setVisibility(ProgressBar.VISIBLE);
+            initTextView.setText(R.string.init_started_text);
+            initButton.setEnabled(false);
         }
 
         @Override

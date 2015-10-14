@@ -1,4 +1,4 @@
-package ghost.mprog.nl.ghost;
+package nl.mprog.ghost.ghost;
 
 import android.app.Application;
 import android.test.ApplicationTestCase;

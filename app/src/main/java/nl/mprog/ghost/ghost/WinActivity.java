@@ -1,9 +1,9 @@
-package ghost.mprog.nl.ghost;
+package nl.mprog.ghost.ghost;
 
 import android.content.Intent;
 import android.graphics.Color;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ArrayAdapter;
@@ -13,7 +13,7 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 
-public class WinActivity extends ActionBarActivity {
+public class WinActivity extends AppCompatActivity {
     public static final String ACTIVITY_NAME = "win";
 
     @Override
@@ -21,14 +21,19 @@ public class WinActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_win);
 
-        SharedPreferencesWrapper spw = new SharedPreferencesWrapper(this);
-        spw.setCurrentActivity(ACTIVITY_NAME);
-        String winnerName = spw.getWinnerName();
-        String loserName = spw.getLoserName();
+        SharedPreferencesWrapper spWrapper = new SharedPreferencesWrapper(this);
+        DatabaseHandler dbHandler = new DatabaseHandler(this);
 
-        DatabaseHandler db = new DatabaseHandler(this);
-        Player winner = db.getPlayer(winnerName);
-        Player loser = db.getPlayer(loserName);
+        TextView winnerField = (TextView) findViewById(R.id.winnerName);
+        TextView loserField = (TextView) findViewById(R.id.loserName);
+        ListView highscoreListView = (ListView) findViewById(R.id.highscoreListView);
+
+        spWrapper.setCurrentActivity(ACTIVITY_NAME);
+        String winnerName = spWrapper.getWinnerName();
+        String loserName = spWrapper.getLoserName();
+
+        Player winner = dbHandler.getPlayer(winnerName);
+        Player loser = dbHandler.getPlayer(loserName);
 
         if (winner == null || loser == null){
             Intent intent = new Intent(this, MainMenuActivity.class);
@@ -36,8 +41,6 @@ public class WinActivity extends ActionBarActivity {
             return;
         }
 
-        TextView winnerField = (TextView) findViewById(R.id.winnerName);
-        TextView loserField = (TextView) findViewById(R.id.loserName);
         winnerField.setText("Winner: " + winnerName + " " + winner.getWins()
                 + "/" + winner.getPlays());
         loserField.setText("Loser: " + loserName + " " + loser.getWins()
@@ -45,11 +48,10 @@ public class WinActivity extends ActionBarActivity {
         winnerField.setTextColor(Color.GREEN);
         loserField.setTextColor(Color.RED);
 
-        ListView hsListView = (ListView) findViewById(R.id.hsListView);
-        ArrayList<String> highscores = db.getHighscores();
+        ArrayList<String> highscores = dbHandler.getHighscores();
         ArrayAdapter<String> arrayAdapter =
                 new ArrayAdapter<>(this,android.R.layout.simple_list_item_1, highscores);
-        hsListView.setAdapter(arrayAdapter);
+        highscoreListView.setAdapter(arrayAdapter);
     }
 
     @Override

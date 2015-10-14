@@ -1,4 +1,4 @@
-package ghost.mprog.nl.ghost;
+package nl.mprog.ghost.ghost;
 
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -27,8 +27,8 @@ public class SharedPreferencesWrapper {
         return sp.getInt(DB_VERSION, -1);
     }
 
-    public String getLanguage(){
-        return sp.getString(LANGUAGE, "EN");
+    public int getLanguage(){
+        return sp.getInt(LANGUAGE, 0);
     }
 
     public String getName1(){
@@ -63,16 +63,16 @@ public class SharedPreferencesWrapper {
         return sp.getString(NAME_2_PICKER, "");
     }
 
-    public boolean getCurrentTurn(){
-        return sp.getBoolean(CURRENT_TURN, true);
+    public int getCurrentTurn(){
+        return sp.getInt(CURRENT_TURN, Game.NO_PLAYER);
     }
 
     public void setDbVersion(int dbVersion){
         this.setInt(DB_VERSION, dbVersion);
     }
 
-    public void setLanguage(String language){
-        this.setString(LANGUAGE, language);
+    public void setLanguage(int language){
+        this.setInt(LANGUAGE, language);
     }
 
     public void setName1(String name1){
@@ -107,8 +107,8 @@ public class SharedPreferencesWrapper {
         this.setString(NAME_2_PICKER, name2Picker);
     }
 
-    public void setCurrentTurn(boolean turn){
-        this.setBoolean(CURRENT_TURN, turn);
+    public void setCurrentTurn(int turn){
+        this.setInt(CURRENT_TURN, turn);
     }
 
     public void resetName1(){
@@ -134,12 +134,6 @@ public class SharedPreferencesWrapper {
     private void setString(String key, String value){
         SharedPreferences.Editor spEditor = sp.edit();
         spEditor.putString(key, value);
-        spEditor.apply();
-    }
-
-    private void setBoolean(String key, boolean value){
-        SharedPreferences.Editor spEditor = sp.edit();
-        spEditor.putBoolean(key, value);
         spEditor.apply();
     }
 

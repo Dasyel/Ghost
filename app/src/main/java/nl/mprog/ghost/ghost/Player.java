@@ -1,4 +1,4 @@
-package ghost.mprog.nl.ghost;
+package nl.mprog.ghost.ghost;
 
 public class Player {
     private int id;
