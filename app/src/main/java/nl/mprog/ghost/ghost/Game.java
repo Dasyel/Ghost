@@ -12,6 +12,8 @@ public class Game {
     public static final int PLAYER_2 = 2;
     public static final int NO_PLAYER = 0;
 
+    private static final int WORD_THRESHOLD = 3;
+
     private Lexicon lexicon;
     private int turn;
     private int winner;
@@ -54,8 +56,9 @@ public class Game {
 
     public void end(){
         if (this.lexicon == null){
-            this.winner = 0;
-        } else if (this.lexicon.contains(this.subWord) && this.subWord.length() > 3){
+            this.endReason = REASON_WORDS_AVAILABLE;
+            this.winner = this.otherPlayer();
+        } else if (this.lexicon.contains(this.subWord) && this.subWord.length() > WORD_THRESHOLD){
             this.endReason = REASON_MADE_WORD;
             this.winner = this.turn;
         } else if (this.lexicon.count() == 0){

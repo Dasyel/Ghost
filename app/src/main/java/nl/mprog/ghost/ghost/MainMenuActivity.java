@@ -54,9 +54,17 @@ public class MainMenuActivity extends Activity {
                 }
             }
         };
+        View.OnClickListener clickListener = new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AutoCompleteTextView namePicker = (AutoCompleteTextView) v;
+                    namePicker.showDropDown();
+            }
+        };
         this.name1Picker.setOnFocusChangeListener(focusChangeListener);
         this.name2Picker.setOnFocusChangeListener(focusChangeListener);
-        this.name1Picker.clearFocus();
+        this.name1Picker.setOnClickListener(clickListener);
+        this.name2Picker.setOnClickListener(clickListener);
 
         this.name1Picker.setText(spWrapper.getName1Picker());
         this.name2Picker.setText(spWrapper.getName2Picker());
