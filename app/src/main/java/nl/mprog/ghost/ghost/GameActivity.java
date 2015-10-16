@@ -46,7 +46,10 @@ public class GameActivity extends AppCompatActivity {
         this.name2 = this.spWrapper.getName2();
 
         this.dbHandler = new DatabaseHandler(this);
-        if (this.dbHandler.getPlayer(this.name1) == null || this.dbHandler.getPlayer(this.name2) == null){
+
+        //if players don't exist, go back to mainMenu
+        if (this.dbHandler.getPlayer(this.name1) == null
+                || this.dbHandler.getPlayer(this.name2) == null){
             Intent intent = new Intent(this, MainMenuActivity.class);
             startActivity(intent);
             return;
@@ -119,7 +122,7 @@ public class GameActivity extends AppCompatActivity {
         this.setNameColors(this.game.getTurn());
     }
 
-    public void checkWinner(View v){
+    public void endGame(View v){
         String winnerName;
         String loserName;
 

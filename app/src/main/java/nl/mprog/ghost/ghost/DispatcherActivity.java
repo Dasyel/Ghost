@@ -12,7 +12,8 @@ import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-
+// This initial activity opens the last activity, giving the feeling the app never closed.
+// It also shows the first time initialization messages.
 public class DispatcherActivity extends Activity {
     private Class nextClass;
 

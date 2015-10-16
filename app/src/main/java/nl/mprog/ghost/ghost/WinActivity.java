@@ -68,7 +68,7 @@ public class WinActivity extends AppCompatActivity {
 
         switch (id) {
             case R.id.new_game_option:
-                this.newGame();
+                this.goToResetActivity();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
@@ -77,10 +77,10 @@ public class WinActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        this.newGame();
+        this.goToResetActivity();
     }
 
-    private void newGame(){
+    private void goToResetActivity(){
         Intent intent = new Intent(this, ResetActivity.class);
         intent.putExtra("previous_activity", ACTIVITY_NAME);
         startActivity(intent);

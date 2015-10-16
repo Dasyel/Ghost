@@ -66,7 +66,7 @@
         android:layout_toStartOf="@+id/guessField"
         android:layout_below="@+id/wordField"
 
-        android:onClick="checkWinner"
+        android:onClick="endGame"
         android:text="@string/bullshit_button" />
 
 </RelativeLayout>

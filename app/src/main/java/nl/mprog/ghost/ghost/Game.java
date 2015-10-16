@@ -43,6 +43,8 @@ public class Game {
     public boolean guess(String letter){
         this.subWord = this.subWord.concat(letter);
 
+        //Initialize lexicon on first guess based on the first letter. Great memory improvement
+        //and no noticeable downsides.
         if (this.lexicon == null){
             this.lexicon = new Lexicon(this.context, this.language, this.subWord.substring(0, 1));
         }
